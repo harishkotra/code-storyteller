@@ -2,6 +2,14 @@
 
 This web application uses the Google Gemini API to explain code snippets in the form of simple, easy-to-understand stories.
 
+<img width="3146" height="2408" alt="screencapture-localhost-3002-2025-11-02-15_55_23" src="https://github.com/user-attachments/assets/3ac119b3-34fd-4b28-a1e2-efc3a7451e7c" />
+<img width="3146" height="2422" alt="screencapture-localhost-3002-2025-11-02-15_59_24" src="https://github.com/user-attachments/assets/528d82c7-d467-4959-9d2a-edc0e90dc496" />
+<img width="3146" height="2805" alt="screencapture-localhost-3002-2025-11-02-16_04_22" src="https://github.com/user-attachments/assets/ad5474d7-a793-4ede-aa16-cc5f56b291d3" />
+
+
+https://github.com/user-attachments/assets/a53423aa-ac1c-458c-90e8-7bcd96d47493
+
+
 ## Prerequisites
 
 - Docker and Docker Compose installed.
