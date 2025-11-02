@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Storyteller</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Add the marked.js library from a CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Code Storyteller 📜</h1>
+            <p>Paste your code below and get a simple story explaining what it does.</p>
+        </header>
+        <main class="main-content">
+            <div class="code-container">
+                <h2>Your Code</h2>
+                <textarea id="codeInput" placeholder="Paste your code here..."></textarea>
+                <button id="generateBtn">Tell the Story</button>
+            </div>
+            <div class="story-container">
+                <h2>The Story</h2>
+                <div id="storyOutput" class="story-box">
+                    <p>Your story will appear here...</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const codeInput = document.getElementById('codeInput');
+        const generateBtn = document.getElementById('generateBtn');
+        const storyOutput = document.getElementById('storyOutput');
+
+        generateBtn.addEventListener('click', async () => {
+            const code = codeInput.value;
+            if (!code.trim()) {
+                alert('Please paste some code first!');
+                return;
+            }
+
+            storyOutput.innerHTML = '<p class="loading">Crafting your story...</p>';
+            generateBtn.disabled = true;
+
+            try {
+                const response = await fetch('/generate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ code })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                
+                // Use marked.parse() to convert the markdown response to HTML
+                storyOutput.innerHTML = marked.parse(data.story);
+
+            } catch (error) {
+                storyOutput.innerHTML = `<p class="error">Something went wrong. Please try again.</p>`;
+                console.error('Error:', error);
+            } finally {
+                generateBtn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
